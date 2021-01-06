@@ -12,6 +12,7 @@ import com.realmatesoft.pexelsdemo.PexelsDemoApplication
 import com.realmatesoft.pexelsdemo.R
 import com.realmatesoft.pexelsdemo.backend.presentation.BackendViewModel
 import com.realmatesoft.pexelsdemo.databinding.ActivityPhotoDetailsBinding
+import com.realmatesoft.pexelsdemo.ui.showSnackbarWithMessage
 
 
 class PhotoDetailsActivity : AppCompatActivity() {
@@ -23,19 +24,22 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private lateinit var photoDetailsActivityBinding: ActivityPhotoDetailsBinding
 
     private val backendViewModel: BackendViewModel by provideViewModel {
-        BackendViewModel(PexelsDemoApplication.instance.backendRepository, PexelsDemoApplication.instance.connectionChecker)
+        // here we can put some parameters from our activity/fragment in to our vm instance
+        BackendViewModel(PexelsDemoApplication.instance.dependencies.backendRepository, PexelsDemoApplication.instance.dependencies.connectionChecker)
     }
 
     private var photoId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         photoDetailsActivityBinding = ActivityPhotoDetailsBinding.inflate(layoutInflater)
+
         setContentView(photoDetailsActivityBinding.root)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         photoId = intent.getIntExtra(photoIdArgument, 0)
-        if (photoId == 0) finish()
         if (savedInstanceState == null) backendViewModel.getSpecificPhotoFromLocalCache(photoId)
 
         setupViews()

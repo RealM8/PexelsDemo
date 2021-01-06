@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityBinding: ActivityMainBinding
 
     private val backendViewModel: BackendViewModel by provideViewModel {
-        BackendViewModel(PexelsDemoApplication.instance.backendRepository, PexelsDemoApplication.instance.connectionChecker)
+        BackendViewModel(PexelsDemoApplication.instance.dependencies.backendRepository, PexelsDemoApplication.instance.dependencies.connectionChecker)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +62,7 @@ class MainActivity : AppCompatActivity() {
         backendViewModel.getPhotosListViewState().observe(this, { viewState ->
             when (viewState) {
                 is BackendViewModel.PhotosListViewState.Loading -> {
-                    if (mainActivityBinding.swipeToRefreshPhotos.isRefreshing) {
-                        mainActivityBinding.swipeToRefreshPhotos.isRefreshing = true
-                    }
+                    mainActivityBinding.swipeToRefreshPhotos.isRefreshing = true
                 }
                 is BackendViewModel.PhotosListViewState.Success -> {
                     mainActivityBinding.swipeToRefreshPhotos.isRefreshing = false
