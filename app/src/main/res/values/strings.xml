@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Pexels Demo</string>
+    <string name="alert">Alert</string>
+    <string name="reload">Reload</string>
+    <string name="exit">Exit</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="offline_mode_warning">Offline mode. Data may be outdated. Please, check Internet connection</string>
+    <string name="accessing_database_failure">Error during accessing local photos cache</string>
+    <string name="photo_details_activity_title">Details</string>
+    <string name="photo_details_activity_details_header">Photo by %1$s on Pexels</string>
+</resources>
